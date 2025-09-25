@@ -1,0 +1,28 @@
+Các loại function trong Javascript
+
+1. Hàm khai báo (function declaration)
+function myFunction() {
+  ....
+}
+
+2. Hàm biểu thức (function Expression)
+const myFunc = function() {
+
+}
+
+3. Hàm mũi tên (arrow function) = () => {
+  ...
+}
+
+4. Hàm khởi tạo (constructor function) 
+function Person() {
+  ...
+}
+
+const ơ = new Person();
+
+
+5. hàm ẩn danh (Anonymous function) 
+setTimeout(() => {
+  
+})
