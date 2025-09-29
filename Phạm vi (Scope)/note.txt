@@ -1,0 +1,67 @@
+# Cách Javascript tìm kiếm Biến
+
+Scope Chain là chuỗi các phạm vi lồng nhau, nơi mỗi phạm vi có thể truy cập biến từ phạm vi bên ngoài nó.
+
+Khi một biến được truy cập, Javascript sẽ tìm kiếm biến đó trong phạm vi hiện tại. Nếu không tìm thấy, nó sẽ tìm trong phạm vi ngoại cục tiếp theo
+và tiếp tục quá trình này cho đến khi tìm thấy biến hoặc đến phạm vi toàn cục.
+
+
+#Tổng kết
+
+## Loại phạm vi
+
+1. Global Scope
+  - var, let, const, Function:
+      - khai báo không nằm trong bất kỳ hàm nào
+      - khai báo không nằm trong bất kỳ block nào
+            - không áp dụng cho var
+            - không áp dụng cho function (khi ở ngoài module)
+      - khai báo không nằm trong bất kỳ module nào
+2. Function Scope
+  - var, let, const, Function
+      - khai báo bên trong phần thân hàm
+3. block Scope
+  - let, const: (không trong module)
+      - khai báo nằm trong block
+  - let, const, Function (trong module)
+      - khai báo nằm trong block
+4. module Scope
+  - var, let, const, Function:
+       - Khai báo bên trong một module
+
+## Phân Loại
+
+- let, const: có phạm vi khối (block Scope)
+- var, function: có phạm vi hàm (function Scope)
+
+## Từ khóa khai báo
+
+1. var 
+2. let
+3. const
+4. Function
+
+## yếu tố cốt lõi
+
+1. Phụ thuộc vào nơi được khai báo
+2. phụ thuộc vào tính chất của từ khóa được khai báo
+
+
+## sự khác biệt
+
+var có function scope, nghĩa là nếu khai báo trong hàm thì biến tồn tại trong toàn bộ hàm, bất kể trong block nào.
+function testVar() {
+    if (true) {
+        var a = 5;
+    }
+    console.log(a); // 5, vẫn truy cập được
+}
+
+
+let và const không có tính năng này:
+function testLet() {
+    if (true) {
+        let b = 5;
+    }
+    console.log(b); // Lỗi: b is not defined
+}
