@@ -1,0 +1,4 @@
+Khi tạo ra một object bao gồm (array, function) cứ là object thì Javascript sẽ lưu Object đó ở bên HEAP (bộ nhớ) và có một địa chỉ 
+tham chiếu VD: #0x001, 
+
+- khi tao tác sửa thuộc tính trong object, thì lúc đó nó sẽ tham chiếu tới địa chỉ mà nó đang lưu ở bên HEAP. rồi nó thực hiện sửa
