@@ -2,3 +2,36 @@ Khi tạo ra một object bao gồm (array, function) cứ là object thì Javas
 tham chiếu VD: #0x001, 
 
 - khi tao tác sửa thuộc tính trong object, thì lúc đó nó sẽ tham chiếu tới địa chỉ mà nó đang lưu ở bên HEAP. rồi nó thực hiện sửa
+
+# Object.keys(obj)
+
+=> Phương thức Object.keys trả về một mảng chứa tất cả các keys (tức là tên của các thuộc tính) từ một đối tượng.
+
+// Định nghĩa một đối tượng với ba thuộc tính
+const obj = { a: 1, b: 2, c: 3 };
+
+// Sử dụng Object.keys để lấy ra tất cả keys của đối tượng
+console.log(Object.keys(obj)); // (3) ["a", "b", "c"]
+
+# Object.values(obj)
+
+=> Phương thức Object.values trả về một mảng chứa tất cả các giá trị của các thuộc tính từ một đối tượng.
+
+// Định nghĩa một đối tượng với ba thuộc tính
+const obj = { a: 1, b: 2, c: 3 };
+
+// Sử dụng Object.values để lấy ra tất cả values của đối tượng
+console.log(Object.values(obj)); // [1, 2, 3]
+
+# Object.entries(obj)
+Phương thức Object.entries trả về một mảng chứa các cặp [key, value] cho mỗi thuộc tính trong đối tượng.
+Mỗi cặp [key, value] là một mảng gồm hai phần tử, với phần tử đầu tiên là tên của thuộc tính (key) 
+và phần tử thứ hai là giá trị tương ứng của thuộc tính đó (value). 
+Điều này giúp bạn có thể trực tiếp duyệt qua và xử lý dữ liệu đối tượng một cách linh hoạt.
+
+// Định nghĩa một đối tượng với ba thuộc tính
+const obj = { a: 1, b: 2, c: 3 };
+
+// Sử dụng Object.entries để lấy ra các cặp [key, value]
+console.log(Object.entries(obj)); // [["a", 1], ["b", 2], ["c", 3]]
+

@@ -46,7 +46,7 @@ const car = {
 const property = "year";
 
 car.color = 'blue'; // Thêm thuộc tính color
-car[property  ] = 2020; // Thêm thuộc tính year
+car[property] = 2020; // Thêm thuộc tính year
 
 console.log(car); // { make: 'Toyota', model: 'Camry', color: 'blue', year: 2020 }
 
