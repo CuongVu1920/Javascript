@@ -1,18 +1,12 @@
-// let person = {
-//   name: 'John'
-// };
 
-// let personCopy = person;
-
-// personCopy.name = "Bob";
-
-// console.log(person.name); // "Bob"; 
+// Cách giải quyết khi cần sao chép sâu (deep copy) là sử dụng hàm structuredClone() có sẵn trong JavaScript.
 
 let person = {
-  name: 'John'
+  name: "John",
+  info: {
+    id: 1234
+  }
 };
+let personCopy = structuredClone(person);
 
-let personCopy = person;
-
-console.log(person === personCopy); // true
-
+console.log(person.info === personCopy.info); // false
