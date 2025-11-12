@@ -1,0 +1,84 @@
+Primitive types là gì?
+- Trong JavaScript, các kiểu dữ liệu nguyên thủy (primitive types) bao gồm: string, number, bigint, boolean, 
+  symbol, null và undefined. Đây là những kiểu dữ liệu mà giá trị của chúng chỉ chứa một giá trị đơn giản và không phải là một đối tượng.
+
+# Cách Primitive types được lưu trữ
+  - Các giá trị nguyên thủy được lưu trực tiếp tại vị trí bộ nhớ mà biến chỉ đến (lưu ở Stack), không giống như reference 
+    types (chỉ lưu địa chỉ tham chiếu đến nơi chứa dữ liệu thực tế).
+
+  - Các giá trị nguyên thủy được lưu trực tiếp tại vị trí bộ nhớ mà biến chỉ đến, 
+    nên việc sửa biến copy sẽ chỉ thay đổi giá trị của biến copy mà không ảnh hưởng tới biến ban đầu.
+
+# Primitive types là bất biến
+  - Trong JavaScript, các giá trị nguyên thủy là bất biến (immutable). 
+    Điều này có nghĩa là một khi một giá trị nguyên thủy được tạo, giá trị đó không thể thay đổi
+
+    Ví dụ: Không thể sửa được một chuỗi
+
+    let str = "hello";
+    str[0] = "ABC";
+
+    console.log(str); // hello
+
+  => Sự bất biến của giá trị nguyên thủy giúp đảm bảo tính toàn vẹn của dữ liệu và 
+     giúp chúng ta dễ dàng kiểm soát các thay đổi dữ liệu trong chương trình.
+
+Reference types là gì?
+  - Kiểu tham chiếu (Reference types) trong JavaScript bao gồm các kiểu dữ liệu như object, array, function, và các đối tượng khác. 
+    Khác với kiểu dữ liệu nguyên thủy, kiểu tham chiếu lưu trữ địa chỉ (tham chiếu) của giá trị trong bộ nhớ, thay vì giá trị thực tế.
+
+  VD:
+  
+    let person = {
+        name: "An",
+        age: 25,
+        city: "Hanoi"
+    };
+
+   **Trong bộ nhớ:**
+    STACK:                          HEAP:
+    ┌──────────────┐               ┌─────────────────────┐
+    │ person       │               │ Địa chỉ 0x1000:     │
+    │   = 0x1000 ──┼──────────────>│   name: "An"        │
+    └──────────────┘               │   age: 25           │
+                                   │   city: "Hanoi"     │
+                                   └─────────────────────┘
+
+  => Stack chỉ lưu địa chỉ 0x1000 (con trỏ/reference)
+  => Heap lưu giá trị thật của object: {name: "An", age: 25, city: "Hanoi"}
+ 
+# Đó chính là lý do tại sao chúng ta cần sử dụng Object.assign() để copy thuộc tính sang một object mới.
+
+  VD:
+
+  let person = {
+    name: "John"
+  };
+
+  let personCopy = Object.assign({}, person);
+  console.log(person);
+  console.log(personCopy);
+
+  ## **Quá trình trong bộ nhớ:**
+
+  ### **Bước 1: Tạo object `person`**
+  ```
+  STACK:                          HEAP:
+  ┌──────────────────┐           ┌─────────────────────┐
+  │ person = 0x1000 ─┼──────────>│ 0x1000:             │
+  └──────────────────┘           │   name: "John"      │
+                                 └─────────────────────┘
+
+  ### **Bước 2: `Object.assign({}, person)` tạo object MỚI**
+
+  STACK:                          HEAP:
+  ┌──────────────────┐           ┌─────────────────────┐
+  │ person = 0x1000 ─┼──────────>│ 0x1000:             │
+  │                  │           │   name: "John"      │
+  │ personCopy       │           └─────────────────────┘
+  │   = 0x2000 ──────┼──────┐    
+  └──────────────────┘      │    ┌─────────────────────┐
+                            └───>│ 0x2000:             │
+                                 │   name: "John"      │
+                                 └─────────────────────┘
+

@@ -1,0 +1,43 @@
+--VD1:
+
+let a = 1;
+let b = a;
+
+b = 2;
+
+console.log(a); // 1
+
+--VD2:
+
+let person = {
+  name: 'John'
+};
+
+let personCopy = person;
+
+personCopy.name = "Bob";
+
+console.log(person.name); // "Bob"; 
+
+--VD3:
+
+let person = {
+  name: 'John'
+};
+
+let personCopy = person;
+
+console.log(person === personCopy); // true
+
+--VD4:
+
+let person = {
+  name: 'John'
+};
+
+let personCopy = {
+  name: 'John's
+};
+
+console.log(person === personCopy); // false
+
