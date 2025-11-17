@@ -1,0 +1,6 @@
+#So sánh objects là gì?
+- Trong JavaScript, objects không được so sánh trực tiếp dựa trên nội dung của 
+  chúng như các kiểu dữ liệu nguyên thủy (ví dụ như số hoặc chuỗi). Thay vào đó, khi so sánh hai objects, 
+  JavaScript so sánh các tham chiếu đến các đối tượng đó. Nếu hai biến tham chiếu đến cùng một object, chúng mới được coi là bằng nhau.
+
+  

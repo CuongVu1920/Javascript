@@ -1,0 +1,71 @@
+VD1:
+
+function changeValue(y) {
+  console.log(y); // 10
+  y = 20;
+  console.log(y); // 20
+}
+
+let x = 10;
+
+changeValue(x);
+
+VD2:
+
+
+function changeValue(y) {
+  y = 20;
+}
+
+let x = 10;
+
+changeValue(x);
+
+console.log(x); // 10
+
+
+=> Trong JavaScript, các kiểu dữ liệu nguyên thủy (primitive types) như 
+   number, string, boolean được truyền theo giá trị (pass by value), không phải truyền theo tham chiếu.
+
+  Điều gì đã xảy ra:
+
+  Khi gọi changeValue(x):
+
+  JavaScript tạo một bản sao của giá trị x (là 10)
+  Bản sao này được gán cho tham số y bên trong function
+  x và y là hai biến độc lập, không liên quan đến nhau
+
+
+  Bên trong function:
+
+  y = 20 chỉ thay đổi giá trị của biến y (bản sao)
+  Biến x ban đầu không bị ảnh hưởng
+
+  Kết quả:
+
+  x vẫn giữ giá trị ban đầu là 10
+
+
+  Hình dung
+
+  x = 10          →  truyền vào function  →  y = 10 (bản sao)
+                                             y = 20 (thay đổi bản sao)
+  x = 10 (không đổi)
+
+
+VD3:
+
+function changeValue(y) {
+  // y = { name: "Cuong"};
+  y.name = "Cuong";
+}
+
+let x = {
+  name: "John"
+};
+
+changeValue(x);
+
+console.log(x); {name: 'Cuong'}
+
+=> là do sao chép tham chiếu của x nên khi sửa thuộc tính của y, thì x vẫn bị đổi

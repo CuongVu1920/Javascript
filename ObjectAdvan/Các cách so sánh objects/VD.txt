@@ -1,0 +1,19 @@
+let car1 = { make: 'Toyota', model: 'Corolla' };
+let car2 = { make: 'Toyota', model: 'Corolla' };
+let car3 = car1;
+
+// Khác tham chiếu
+console.log(car1 === car2); // false
+
+// Cùng tham chiếu
+console.log(car1 === car3); // true
+
+=> So sánh objects thường được dùng để xác định xem hai biến có tham chiếu đến cùng một vị trí trong bộ nhớ không, 
+   hoặc để kiểm tra xem hai object có chứa cùng một cặp khóa/giá trị không.
+
+## Cách 2: Sử dụng JSON.stringify để so sánh nội dung
+
+let student1 = { id: 1, name: "Bob" };
+let student2 = { id: 1, name: "Bob" };
+
+console.log(JSON.stringify(student1) === JSON.stringify(student2)); // true
