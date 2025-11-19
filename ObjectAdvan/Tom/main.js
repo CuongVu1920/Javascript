@@ -2,16 +2,19 @@
 
 /**
  * Health / HP: Máu
- * Attack power/ATK: Tấn công
+ * Attack power/ATK: Tấn công,
+ * defense: phòng thủ
  */
 
 const tom = {
   name: "Tom",
-  hp: 200,
+  hp: 1000,
   atk: 50,
+  defense: 5,
   attack(target) {
-    target.hp = target.hp - this.atk;
-    console.log(`${this.name} "phang" ${target.name} với ${this.atk} sát thương, khiến cho ${target.name} còn ${target.hp} máu`);
+    const damage = Math.max(this.atk - target.defense, 0);
+    target.hp -= damage;
+    console.log(`${this.name} "phang" ${target.name} với ${damage} sát thương, khiến cho ${target.name} còn ${target.hp} máu`);
   },
   isAlive() {
     return this.hp > 0;
@@ -20,11 +23,13 @@ const tom = {
 
 const jerry = {
   name: "Jerry",
-  hp: 2000,
+  hp: 500,
   atk: 20,
+  defense: 20,
   attack(target) {
-    target.hp = target.hp - this.atk;
-    console.log(`${this.name} "phang" ${target.name} với ${this.atk} sát thương, khiến cho ${target.name} còn ${target.hp} máu`);
+    const damage = Math.max(this.atk - target.defense, 0);
+    target.hp -= damage;
+    console.log(`${this.name} "phang" ${target.name} với ${damage} sát thương, khiến cho ${target.name} còn ${target.hp} máu`);
   },
   isAlive() {
     return this.hp > 0;
