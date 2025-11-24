@@ -41,7 +41,15 @@ function Character(name, hp, atk, defense,speed, counterRate) {
 const tom = new Character("Tom", 1000, 50, 5, 30, 0.5);
 
 // Tạo ra nhân vật Jerry
-const jerry = new Character("Jerry", 500, 20, 20,10, 0.2);
+const jerry = new Character("Jerry", 500, 20, 20,30, 0.2);
+
+function battleRound(char1, char2) {
+  char1.attack(char2);
+
+  if(char2.isAlive() && char1.isAlive()) {
+    char2.attack(char1);
+  }
+}
 
 function battle(char1, char2) {
   let round = 1;
@@ -49,18 +57,19 @@ function battle(char1, char2) {
   while (char1.isAlive() && char2.isAlive()) {
     console.log(`Round: ${round}`);
     
-    if(char1.speed >= char2.speed)
-      char1.attack(char2);
-      if(char2.isAlive()) {
-        char2.attack(char1);
+    if(char1.speed > char2.speed) {
+      battleRound(char1, char2);
+    }else if(char2.speed > char1.speed){
+      battleRound(char2, char1);
+    }else {
+      if(Math.random() < 0.5) {
+        battleRound(char1, char2);
       }else {
-        char2.attack(char1);
-        if(char1.isAlive()) {
-          char1.attack(char2);
-        }
+        battleRound(char2, char1);
       }
+    }
 
-      round++;
+    round++;
   }
 
   const winer = char1.isAlive() ? char1 : char2;
