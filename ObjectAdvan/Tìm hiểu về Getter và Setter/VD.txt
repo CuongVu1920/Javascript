@@ -1,0 +1,41 @@
+VD1:
+
+  const user = {
+    firstName: "A",
+    lastName: "Nguyen Van",
+
+    get fullName() {
+      return `${this.lastName} ${this.firstName}`;
+    },
+    set fullName(newName) {
+      const names = newName.split(" ");    
+      this.firstName = names.pop();
+      this.lastName = names.join(" ");
+    }
+  }
+
+  console.log(user.fullName);
+  user.fullName = "Vu Viet Cuong"
+  console.log(user.fullName);
+
+VD2:
+
+  const product = {
+    _price: 0,
+
+    get price() {
+      return this._price;
+    },
+
+    set price(value) {
+      if (value < 0) {
+        throw new Error('Giá không hợp lệ');
+      }
+      this._price = value;
+    }
+  };
+
+  product.price = 10000; // OK
+  console.log(product.price); // 10000
+  // product.price = -500; // Lỗi
+  // console.log(product.price); 
