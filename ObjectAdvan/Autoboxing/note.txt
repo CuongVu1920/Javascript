@@ -1,0 +1,50 @@
+#Autoboxing trong JavaScriptAutoboxing 
+ - là cơ chế JavaScript tự động chuyển primitive values (giá trị nguyên thủy) thành wrapper objects 
+   tạm thời để có thể gọi methods/properties, sau đó hủy bỏ wrapper object ngay lập tức.
+
+2. Cơ chế Autoboxing hoạt động
+Khi bạn truy cập property/method của primitive:
+
+Bước 1: Tạo wrapper object tạm
+
+let str = "hello";
+str.toUpperCase();
+
+// JavaScript thực hiện ngầm:
+// 1. Tạo wrapper: new String("hello")
+// 2. Gọi method: new String("hello").toUpperCase()
+// 3. Trả về kết quả: "HELLO"
+// 4. Hủy wrapper object
+
+Bước 2: Sau khi dùng xong → Hủy ngay
+
+let str = "hello";
+str.customProp = "test";  // Gán vào wrapper tạm
+console.log(str.customProp); // undefined (wrapper đã bị hủy!)
+
+# 8. Prototype của Primitives
+
+Vì có autoboxing, primitives có thể truy cập prototype của wrapper:
+
+let str = "hello";
+
+// str.__proto__ trỏ đến String.prototype (qua autoboxing)
+console.log(str.__proto__ === String.prototype); // true
+
+  // Có thể thêm method vào String.prototype
+  String.prototype.shout = function() {
+    return this.toUpperCase() + "!!!";
+  };
+
+  console.log(str.shout()); // "HELLO!!!"
+  ```
+
+  **Prototype chain:**
+  ```
+  "hello" (primitive)
+    → (autoboxing) → String { "hello" }
+      → String.prototype
+        → Object.prototype
+          → null
+
+11. Null và Undefined - KHÔNG có autoboxing
