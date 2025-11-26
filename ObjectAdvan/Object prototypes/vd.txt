@@ -1,0 +1,94 @@
+#hasOwnProperty() 
+- Kiểm tra property có phải của chính object khôngMethod này kiểm tra xem một 
+  property có trực tiếp thuộc về object hay không (không tính property từ prototype chain).
+
+- Cú pháp: object.hasOwnProperty(propertyName)
+
+function Character(name, hp, atk) {
+  this.name = name;
+  this.hp = hp;
+  this.atk = atk;
+}
+
+  Character.prototype.speed = 100;
+  Character.prototype.attack = function() { /*...*/ };
+
+  const tom = new Character("Tom", 1000, 50);
+
+  // Properties của chính tom
+  console.log(tom.hasOwnProperty('name'));   // true
+  console.log(tom.hasOwnProperty('hp'));     // true
+  console.log(tom.hasOwnProperty('atk'));    // true
+
+  // Properties từ prototype
+  console.log(tom.hasOwnProperty('speed'));  // false (từ Character.prototype)
+  console.log(tom.hasOwnProperty('attack')); // false (từ Character.prototype)
+
+  // Nhưng vẫn truy cập được!
+  console.log(tom.speed);  // 100
+  console.log(tom.attack); // function
+
+  VD2: Use case thực tế
+
+  1. Lọc properties khi loop
+    const tom = new Character("Tom", 1000, 50);
+    tom.weapon = "Sword"; // Thêm property riêng
+
+    for (let key in tom) {
+      if (tom.hasOwnProperty(key)) {
+        console.log(key, tom[key]);
+      }
+    }
+    // Output:
+    // name Tom
+    // hp 1000
+    // atk 50
+    // weapon Sword
+    // (không in speed và attack từ prototype)
+
+
+    VD gốc:
+
+    function Character(name, hp, atk) {
+      this.name = name;
+      this.hp = hp;
+      this.atk = atk;
+      
+      // this.attack = function (target) {
+      //   const damage = Math.max(this.atk - target.defense, 0);
+      //   target.hp -= damage;
+      //   console.log(`${this.name} "phang" ${target.name} với ${damage} sát thương, khiến cho ${target.name} còn ${target.hp} máu`);
+      // };
+    }
+
+    // Là cơ chế kế thừa, mỗi khi tạo ra 1 hàm trừ arrow function thì js sẽ tự động tạo 1 thuộc tính cho hàm đó. đó là prototype
+    Character.prototype.speed = 100
+    Character.prototype.attack = function (target) {
+        const damage = Math.max(this.atk, 0);
+        target.hp -= damage;
+        console.log(`${this.name} "phang" ${target.name} với ${damage} sát thương, khiến cho ${target.name} còn ${target.hp} máu`);
+      };
+
+
+    // Tạo ra nhân vật Tom
+    const tom = new Character("Tom", 1000, 50);
+
+    // Tạo ra nhân vật Jerry
+    const jerry = new Character("Jerry", 500, 20);
+
+    console.log(tom.hasOwnProperty("speed")); // false
+
+    // => bởi vì speed không phải thuộc tính trực tiếp của tom nên trả ra false
+
+
+    /**
+    * Note: khi tạo phương thức trong function constructor thì môi khi tạo 1 đối tượng mới, sẽ tạo 1 hàm mới 
+    *      (method của tom sẽ khac method của jerry)
+    * - khác tham chiếu nên khi so sánh sẽ trả ra false
+    * 
+    * Phương thức sử dụng prototype:
+    * - còn khi sử dụng prototype thì sẽ cùng tham chiếu.
+    * - không sử dụng được biến nội bộ trong function constructor
+    */
+
+

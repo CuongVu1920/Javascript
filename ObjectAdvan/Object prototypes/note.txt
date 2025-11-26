@@ -1,0 +1,16 @@
+Prototype Chain - Chuỗi nguyên mẫu
+
+Mỗi object trong JS đều có một internal property gọi là [[Prototype]] (truy cập qua __proto__ hoặc Object.getPrototypeOf()).
+
+const obj = {};
+console.log(obj.__proto__ === Object.prototype); // true
+console.log(obj.__proto__.__proto__); // null (đỉnh của chuỗi)
+
+
+Cách JS tìm kiếm property
+Khi bạn truy cập obj.someProperty, JS sẽ:
+
+1. Tìm trong chính obj
+2. Không thấy → tìm trong obj.__proto__
+3. Không thấy → tìm trong obj.__proto__.__proto__
+4. Cứ thế cho đến khi gặp null
