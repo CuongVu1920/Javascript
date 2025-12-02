@@ -1,0 +1,1 @@
+Khi xác định this thì hãy nhìn vào ngữ cảnh hàm hay ngữ cảnh toàn cục đầu tiên nhé bro,
