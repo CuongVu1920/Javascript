@@ -1,0 +1,121 @@
+#Từ khóa this nâng cao
+
+  - từ khóa "this" trong Javascript rất linh hoạt và có thể trỏ đến các đối tượng khác nhau tùy vào ngữ cảnh
+    mà nó được sử dụng. 
+
+# Global Context (Ngữ cảnh toàn cục)
+
+  - Trong ngữ cảnh toàn cục (ngoài bất kỳ hàm nào), "this" trỏ tới đối tượng toàn cục (global object). Trong trình duyệt
+    web, đối tượng này là window; trong NodeJS, đối tượng này là global
+
+    console.log(this); // Window {window: ƒ get window(), self: ƒ get self(), document: ƒ get document(), name: ƒ get name(), location: ƒ get location()…}
+
+# Function Context (Ngữ cảnh hàm)
+
+  - Trong một hàm thông thường, giá trị của "this" phụ thuộc vào cách mà hàm được gọi.
+
+# Hàm được gọi thông thường
+
+  - Khi một hàm được gọi như một hàm thông thường (không phải phương thức của đối tượng), "this" trỏ tới đối tượng
+    toàn cục (hoặc undefined trong Strict Mode).
+
+  VD1:
+    console.log(this); // Window (trình duyệt) hoặc global (Node.js)
+
+    function showThis() {
+      console.log(this); // Window (non-strict) hoặc undefined (strict mode)
+    }
+
+  VD2:
+    'use strict';
+
+    function showThis() {
+        console.log(this);
+    }
+
+    showThis(); // undefined
+
+# Phương thức của đối tượng
+  - Khi một hàm được gọi như phương thức của một đối tượng, "this" trỏ tới đối tượng đó.
+
+  const person = {
+    name: "John",
+    showThis: function() {
+        console.log(this);
+    }
+  };
+
+  person.showThis(); => {name: "John", showThis: ƒ showThis()}
+
+# Constructor Functions (Hàm khởi tạo)
+
+ - Khi một hàm khởi tạo (Constructor function) được gọi với từ khóa new, this trỏ tới đối tượng mới được tạo ra.
+
+ VD:
+      function Person(name) {
+        this.name = name;
+        this.showThis = function() {
+            console.log(this);
+        }
+      }
+
+      const person = new Person('John');
+
+      console.log(person.name); // John
+      person.showThis(); // Person {name: "John", showThis: ƒ ()}
+
+# Hàm mũi tên
+
+  - Hàm mũi tên không có "this" của riêng nó; thay vào đó, nó kế thừa "this" từ phạm vi nơi nó được định nghĩa.
+
+  VD1:
+    const person = {
+      name: 'John',
+      showThis: function() {
+          const innerFunction = () => {
+              console.log(this);
+          };
+          innerFunction();
+      }
+    };
+
+    person.showThis(); // {name: "John", showThis: ƒ showThis()}
+
+  VD2:
+    const arrowFunc = () => {
+    console.log(this); 
+  };
+
+arrowFunc(); // Kế thừa this từ scope bên ngoài => window
+
+  /**
+  * Arrow function KHÔNG TẠO this riêng
+    this được "kế thừa" từ nơi định nghĩa (lexical scope)
+  */
+
+    const team = {
+    name: 'Dev Team',
+    members: ['Alice', 'Bob'],
+    
+    showMembersWrong() {
+      console.log(this); // ✅ this = team (vì gọi team.showMembersWrong())
+      
+      this.members.forEach(function(member) {
+        console.log(this); // ❌ this = undefined (strict mode) hoặc Window
+        // Vì đây là callback, không được gọi như method
+        console.log(`${member} - ${this.name}`); // undefined
+      });
+    },
+    
+    showMembersRight() {
+      console.log(this); // ✅ this = team
+      
+      this.members.forEach(member => {
+        console.log(this); // ✅ this = team (kế thừa từ showMembersRight)
+        console.log(`${member} - ${this.name}`); // Hoạt động đúng!
+      });
+    }
+  };
+
+  team.showMembersWrong();
+  team.showMembersRight();
