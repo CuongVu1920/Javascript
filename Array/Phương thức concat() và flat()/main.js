@@ -17,3 +17,21 @@
   console.log(combined); // (4) ['apple', 'banana', 'carrot', 'pea']
   
   
+// -- Phương thức flat() --
+
+  /**
+   * Phương thức flat() được sử dụng để làm phẳng mảng lồng nhau thành một mảng duy nhất. Bạn có thể chỉ định mức độ làm phẳng bằng cách
+   * cung cấp một tham số cho phương thức này.
+   * 
+   * - Cú pháp: let newArray = oldArray.flat(depth);
+   *  
+   * + dept: là mức độ làm phẳng, mặc định là 1. Để làm phẳng tối đa mảng, sử dụng "Infinity"
+   */
+
+  // VD:
+
+    let arr = [1, 2, [3, 4, [5, 6]]];
+
+    let flatArray = arr.flat(2);
+
+    console.log(flatArray); // (6) [1, 2, 3, 4, 5, 6]
