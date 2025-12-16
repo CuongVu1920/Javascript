@@ -1,0 +1,14 @@
+forEach:
+
+- Được thiết kế để duyệt qua mỗi phần tử của mảng một cách dễ dàng và thực thi một hàm cho mỗi phần tử.
+- Không thể sử dụng break hay continue để kết thúc sớm hoặc bỏ qua các phần tử. Việc sử dụng return trong 
+ forEach chỉ kết thúc hàm hiện tại chứ không kết thúc vòng lặp, lần lặp tiếp theo vẫn được diễn ra.
+- Chỉ thực hiện hàm với các phần tử có giá trị, không xử lý các phần tử trống (empty).
+
+
+Vòng lặp truyền thống (for, while):
+
+- Có thể dừng hoặc thoát khỏi vòng lặp bất cứ lúc nào sử dụng break hoặc return (khi ở trong một hàm).
+- Cho phép điều khiển chi tiết hơn về quá trình lặp, như bỏ qua một số phần tử với continue 
+  hoặc điều chỉnh điều kiện lặp tại bất kỳ điểm nào.
+- Luôn duyệt qua tất cả các phần tử của mảng, kể cả các phần tử empty.
