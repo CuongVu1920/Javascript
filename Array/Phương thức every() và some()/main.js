@@ -50,4 +50,79 @@
 
     console.log(result3); // false
     
+// #Phương thức some() là gì?
+
+/**
+ * some() là một phương thức của mảng trong JS, được sử dụng để kiểm tra xem có ít nhất một phần tử trong mảng có thỏa mãn 1 điều kiện
+ * cụ thể được xác định bởi một hàm callback hay không. Nếu có 1 phần tử thỏa mãn điều kiện này, phương thức trả về "true", ngược lại nó trả
+ * về "false".
+ * 
+ * Cú pháp:
+ *  const bool = array.some(callbackFunction(element, index, array) {
+      // Điều kiện kiểm tra
+    }, thisValue);
+ */
+
+  // VD1:
+
+  const numbers = [1, 5, 2, 7, 8, 10];
+
+  // Kiểm tra trong mảng có chứa số chẵn không
+  const result4 = numbers.some(number => number % 2 === 0);
+
+  console.log(result4); // true
+
+  // Phương thức some() rất hữu ích khi bạn chỉ cần xác định xem trong một mảng 
+  // có phần tử nào đó thỏa mãn một điều kiện nhất định hay không, mà không cần tất cả phải thỏa mãn điều kiện đó.
+
+  // #Ví dụ sử dụng some()
+
+    // VD: Kiểm tra xem có bất cứ học sinh nào từ 60 điểm trở lên không?
+
+    const students = [
+      { name: 'John', score: 55 },
+      { name: 'Bob', score: 80 },
+      { name: 'Alice', score: 45 }
+    ];
+
+    const result5 = students.some((student) => {
+      return student.score > 60;
+    })
+
+    console.log(result5); // true
+
+    // VD: Kiểm tra xem có sản phẩm nào hết hàng không
+
+    const products2 = [
+      { name: 'Tablet', stock: 10 },
+      { name: 'Laptop', stock: 0 },
+      { name: 'Phone', stock: 5 }
+    ];
+
+    const result6 = products2.some((product) => {
+      return product.stock === 0;
+    });
+
+    console.log(result6); // true
+
+
+    /**
+     * Các sai lầm thường gặp: 
+     *  #Hiểu nhầm về giá trị trả về của every()
+     *   - ngta nhầm lẫn rằng "every()" sẽ trả về false nễu mảng rỗng. Tuy nhiên, theo định nghĩa, every() sẽ trả về true cho mảng rỗng vì
+     *     không có phẩn từ nào vi phạm điều kiện
+     */
     
+
+    // VD
+
+    const numbers2 = [];
+
+    const result7 = numbers.every(num => num > 0);
+
+    console.log(result7);
+
+    if (result7) {
+      console.log('Do something...');
+    }
+        
