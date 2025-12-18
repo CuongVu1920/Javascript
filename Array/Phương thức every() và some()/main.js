@@ -125,4 +125,3 @@
     if (result7) {
       console.log('Do something...');
     }
-        
