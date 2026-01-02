@@ -33,7 +33,7 @@
 
 // VD1:
 
-let text = "Hello, World!";
+let text = "Hello, World!".to
 let result = text.slice(0, 5);
 
 console.log(result); // Hello
