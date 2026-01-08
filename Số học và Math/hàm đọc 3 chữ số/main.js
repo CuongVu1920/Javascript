@@ -86,10 +86,12 @@ function readMoney(number) {
 
   let index = 0;
   let result = '';
+  lastIndex = Math.floor(String(number).length / 3);
 
   do {
     const threeDigits = number % 1000;
-    const text = readThreeDigits(threeDigits);
+    const hasScale = index !== lastIndex;
+    const text = readThreeDigits(threeDigits, hasScale);
 
     if(threeDigits > 0) {
       const unit = scaleText[index];
@@ -97,8 +99,6 @@ function readMoney(number) {
     }
     
     number = Math.floor(number / 1000);
-
-    console.log({ number, threeDigits, text});
     
     index++;
   } while (number > 0);
@@ -106,15 +106,17 @@ function readMoney(number) {
   return result.trim() + " đồng";
 }
 
-console.log(readMoney(1234567)); // một triệu hai trăm ba mươi bốn nghìn năm trăm sáu mươi bảy đồng
-console.log(readMoney(2));
-console.log(readMoney(10));
-console.log(readMoney(100));
-console.log(readMoney(1000));
-console.log(readMoney(10000));
-console.log(readMoney(100000));
-console.log(readMoney(1000000));
-console.log(readMoney(10000000000));
+// console.log(readMoney(1234567)); // một triệu hai trăm ba mươi bốn nghìn năm trăm sáu mươi bảy đồng
+// console.log(readMoney(2));
+// console.log(readMoney(10));
+// console.log(readMoney(100));
+// console.log(readMoney(1000));
+// console.log(readMoney(10000));
+// console.log(readMoney(100000));
+// console.log(readMoney(1000000));
+// console.log(readMoney(10000000000));
+console.log(readMoney(1222002)); // một nghìn không trăm lẻ hai đồng
+
 
 
 
