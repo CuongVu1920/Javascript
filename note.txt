@@ -3,3 +3,12 @@ Ngày 1/6/2026:
     + giờ: duration / 3600 (vì 1 giờ = 3600s)
     + phút: (duration % 3600) / 60 vì (3660 % 3600 = 60 rồi 60 / 60 = 1 phút)
     + giây: duration % 60 vì (70 % 60 = 10s)
+
+Ngày 09/01/2026
+  - cần nhớ là: khi tham số là milliseconds
+    + const totalMinutes = Math.floor((end - start) / 60000);
+    + let days =  Math.floor((totalMinutes / 60) / 24 );
+    + let hours = Math.floor((totalMinutes / 60) % 24 ); 
+    + let minutes = Math.floor((totalMinutes % 60))
+
+  - Date.now(), Date.parse() và Date.UTC() đều trả tra timestamp
