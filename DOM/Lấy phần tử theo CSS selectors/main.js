@@ -10,7 +10,6 @@ const result = document.querySelector("#heading");
 
 console.log(result);
 
-const titleNotABC = document.querySelector(".title:not(.abc");
-
+const titleNotABC = document.querySelector(".title:not(.abc)");
 console.log(titleNotABC);
 
