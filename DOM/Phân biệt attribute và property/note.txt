@@ -1,0 +1,108 @@
+#Attribute (thuộc tính HTML)
+
+- được định nghĩa trong HTML markup
+- Luôn là string
+- Static - không tự động cập nhật khi người dùng tương tác
+- Truy cập qua: getAttribute(), setAttribute(), removeAttribute(), hasAttribute()
+
+# Property (Thuộc tính Javascript)
+
+- là thuộc tính của Javascript object (DOM element)
+- có nhiều kiểu dữ liệu (string, boolean, number, object,...)
+- Dynamic - tự động cập nhật theo trạng thái hiện tại
+- Truy cập qua: element.propertyName (dot notation)
+
+// VD
+
+<input id="myInput" type="text" value="Hello" class="input-field">
+
+const input = document.getElementById('myInput');
+
+// === ATTRIBUTE (HTML) ===
+console.log(input.getAttribute('value'));  // "Hello"
+console.log(input.getAttribute('class'));  // "input-field"
+console.log(typeof input.getAttribute('value')); // "string"
+
+// === PROPERTY (JavaScript) ===
+console.log(input.value);      // "Hello"
+console.log(input.className);  // "input-field"
+console.log(input.type);       // "text"
+
+Sự khác biệt quan trọng:
+
+1. Cập nhật khi người dùng thay đổi:
+
+// User gõ "World" vào input
+
+// Attribute - KHÔNG thay đổi (giá trị ban đầu)
+console.log(input.getAttribute('value')); // "Hello"
+
+// Property - Thay đổi theo (giá trị hiện tại)
+console.log(input.value); // "World"
+
+2. Kiểu dữ liệu:
+
+<input type="checkbox" checked>
+<a href="/home">Link</a>
+
+const checkbox = document.querySelector('input[type="checkbox"]');
+const link = document.querySelector('a');
+
+// ATTRIBUTE - luôn là string
+console.log(checkbox.getAttribute('checked')); // "" (empty string)
+console.log(typeof checkbox.getAttribute('checked')); // "string"
+
+// PROPERTY - đúng kiểu dữ liệu
+console.log(checkbox.checked); // true (boolean)
+console.log(typeof checkbox.checked); // "boolean"
+
+// Với href
+console.log(link.getAttribute('href')); // "/home" (như trong HTML)
+console.log(link.href); // "http://example.com/home" (URL đầy đủ)
+
+
+Note 2.0
+
+const input = document.querySelector('input');
+
+// === TRẠNG THÁI BAN ĐẦU (Pristine) ===
+// Attribute và Property còn "liên kết"
+console.log('--- Ban đầu ---');
+console.log('Attribute:', input.getAttribute('value')); // "default"
+console.log('Property:', input.value);                   // "default"
+
+// Set attribute → property theo
+input.setAttribute('value', 'new-default');
+console.log('Property sau khi set attribute:', input.value); // "new-default" ✅
+
+// === SAU KHI THAY ĐỔI PROPERTY (Dirty) ===
+// Liên kết bị đứt
+console.log('\n--- Sau khi user gõ ---');
+input.value = 'user-input';
+
+console.log('Attribute:', input.getAttribute('value')); // "new-default" (không đổi)
+console.log('Property:', input.value);                   // "user-input"
+
+// Set attribute → property KHÔNG theo nữa
+input.setAttribute('value', 'another-default');
+console.log('Attribute:', input.getAttribute('value')); // "another-default" ✅
+console.log('Property:', input.value);                   // "user-input" ❌ Vẫn giữ nguyên!
+
+// === RESET FORM ===
+// Attribute vẫn có tác dụng khi reset
+const form = input.closest('form');
+form.reset();
+console.log('\n--- Sau khi reset ---');
+console.log('Property:', input.value); // "another-default" (lấy từ attribute)
+```
+
+## **Sơ đồ luồng:**
+```
+[TRẠNG THÁI PRISTINE]
+Attribute ⟷ Property (2 chiều sync)
+
+     ↓ (user gõ hoặc set property)
+
+[TRẠNG THÁI DIRTY]
+Attribute ⟶ Property (1 chiều, chỉ khi reset)
+Attribute ⟵ Property (không còn sync)
