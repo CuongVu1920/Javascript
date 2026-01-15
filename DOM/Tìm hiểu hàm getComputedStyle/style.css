@@ -1,0 +1,8 @@
+#heading {
+  color: green !important;
+}
+
+#heading::before {
+  content: "hello: ";
+  width: 100px;
+}
