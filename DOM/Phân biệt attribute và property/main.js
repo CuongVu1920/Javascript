@@ -22,7 +22,8 @@ console.log(email); // input#email
 
 // email.value => là property
 
-// email.value = 'nguyenvana@gmail.com' → bạn đang thay đổi PROPERTY, còn ATTRIBUTE thì KHÔNG thay đổi.
+// email.value = 'nguyenvana@gmail.com' → bạn đang thay đổi PROPERTY, còn ATTRIBUTE thì KHÔNG thay đổi. (<input type="email" id="email" value="abc@gmail.com">)
+
 
 // email.setAttribute("value", "cuongvu@gmail.com") -> thay đổi ATTRIBUTE thì PROPERTY cũng thay đổi
 
