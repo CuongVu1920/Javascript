@@ -16,3 +16,7 @@ console.log(react.top);
 console.log(react.left);
 console.log(react.right);
 console.log(react.bottom);
+console.log(react.width);
+console.log(react.height);
+console.log(react.x);
+console.log(react.y);
