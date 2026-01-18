@@ -12,4 +12,7 @@ console.log(box.offsetLeft); // 8
 // React - luôn tính từ viewport
 const react = box.getBoundingClientRect();
 
-console.log(react);
+console.log(react.top);
+console.log(react.left);
+console.log(react.right);
+console.log(react.bottom);
