@@ -37,7 +37,7 @@ console.log(text.previousElementSibling); // p
 
 // #Tìm Node cha từ Node con
 
-console.log(text.parentElement);
+console.log(text.parentElement); //
 console.log(text.parentNode);
 
 
