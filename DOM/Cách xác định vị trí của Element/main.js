@@ -20,3 +20,4 @@ console.log(react.width);
 console.log(react.height);
 console.log(react.x);
 console.log(react.y);
+console.log(react);
