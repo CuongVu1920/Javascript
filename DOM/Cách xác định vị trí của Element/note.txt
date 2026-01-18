@@ -1,0 +1,34 @@
+// Xử lý margin collapse cha con
+
+<div class="cha">
+  <p class="con" style="margin-top: 30px;">Nội dung</p>
+</div>
+```
+
+**Kết quả**: 
+- ❌ Không phải: `<p>` cách mép trên của `<div>` 30px
+- ✅ Thực tế: Margin "thọt" ra ngoài, **thẻ cha bị đẩy xuống 30px**
+```
+┌─────────────────┐
+│                 │ ← 30px khoảng cách ở ĐÂY (thẻ cha bị đẩy)
+│  ┌───────────┐  │
+│  │ Nội dung  │  │ ← Không có khoảng cách trong thẻ cha
+│  └───────────┘  │
+└─────────────────┘
+
+Các cách ngăn hiện tượng này:
+1. Thêm padding cho thẻ cha (Hay dùng nhất)
+
+.cha {
+  padding-top: 1px; /* Hoặc giá trị bất kỳ */
+}
+
+2. Thêm border cho thẻ cha
+css.cha {
+  border-top: 1px solid transparent;
+}
+
+3. Dùng overflow
+css.cha {
+  overflow: hidden; /* hoặc auto */
+}
