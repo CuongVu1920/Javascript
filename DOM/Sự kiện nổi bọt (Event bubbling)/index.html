@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sự kiện nổi bọt (Event bubbling)</title>
+  <style>
+    #parent,
+    #child {
+      padding: 20px;
+      background: greenyellow;
+    }
+
+    #child {
+      background: orange;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background: lightblue;
+    }
+
+    .icon {
+      background: wheat;
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- Event building  -->
+   <div id="parent">
+    <div id="child">
+      <button id="button">Click me!</button>
+    </div>
+   </div>
+
+   <!-- Button  -->
+    <button class="btn">
+      <span class="icon">&times;</span>
+      <span class="title">Close!</span>
+    </button>
+
+
+  <script src="./main.js"></script>
+</body>
+</html>
