@@ -94,6 +94,9 @@ function renderTasks() {
 
 
   const html = tasks.map((task, index) => {
+    // Sử dụng DOMPurify.sanitize() để làm sạch input
+    // const safeTitle = DOMPurify.sanitize(task.title);
+
     return `
       <li class="task-item ${task.completed ? 'completed' : ''}" data-index="${index}">
           <span class="task-title">${escapeHTML(task.title)}</span>
