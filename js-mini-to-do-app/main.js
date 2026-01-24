@@ -6,6 +6,13 @@ const formTask = document.querySelector('.todo-form');
 const inputTask = document.querySelector('#todo-input');
 const textNoTasks = document.querySelector('.no-tasks');
 
+function escapeHTML(html) {
+  const div = document.createElement('div');
+  div.innerText = html;
+
+  return div.innerHTML;
+}
+
 
 function checkDuplicate(listTask, newTitle, excludeIndex = -1) {
 
@@ -21,7 +28,10 @@ function saveTasks() {
 
 function handleTaskAction(event) {
   const taskItem = event.target.closest('.task-item');
-  const taskIndex = +taskItem.getAttribute('task-index');
+  // const taskIndex = +taskItem.getAttribute('data-index');
+  const taskIndex = +taskItem.dataset.index;
+  console.log(taskIndex);
+  
   const task = tasks[taskIndex];
 
   if(event.target.closest(".task-btn.edit")) {
@@ -85,8 +95,8 @@ function renderTasks() {
 
   const html = tasks.map((task, index) => {
     return `
-      <li class="task-item ${task.completed ? 'completed' : ''}" task-index="${index}">
-          <span class="task-title">${task.title}</span>
+      <li class="task-item ${task.completed ? 'completed' : ''}" data-index="${index}">
+          <span class="task-title">${escapeHTML(task.title)}</span>
           <div class="task-action">
               <button class="task-btn edit"}">Edit</button>
               <button class="task-btn done">${task.completed ? 'Mark as undone' : 'Mark as done'}</button>
@@ -98,6 +108,7 @@ function renderTasks() {
   textNoTasks.textContent = '';
 
   taskList.innerHTML = html;
+  
 }
 
 
