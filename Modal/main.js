@@ -1,25 +1,11 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-  // <!-- Modal 3 -->
-  // <div id="modal-3" class="modal-backdrop">
-  //   <div class="modal-container">
-  //     <button class="modal-close">&times;</button>
-  //     <div class="modal-content">
-  //       <p>
-  //         ....
-  //       </p>
-  //     </div>
-
-  //   </div>
-  // </div>
 
 
 function Modal() {
   this.openModal = (option = {}) => {
-    const { templateId } = option;
-    console.log(templateId);
-    
+    const { templateId } = option;    
     const template = $(`#${templateId}`);
 
     if(!template) {
@@ -72,6 +58,7 @@ function Modal() {
       }
     });
 
+    return backdrop;
   };
 
   this.closeModal = (modalElement) => {
@@ -88,24 +75,36 @@ const modal = new Modal();
 // modal.openModal('<p>This is a dynamically created modal!</p>');
 
 $("#open-modal-1").onclick = () => {
-  modal.openModal({
+  const modalElement = modal.openModal({
     templateId: "modal-1",
   });
+  console.log(modalElement);
 }
 
 
 $("#open-modal-2").onclick = () => {
-  modal.openModal({
+  const modalElement = modal.openModal({
     templateId: "modal-2",
   });
-}
 
+  const form = modalElement.querySelector("form");
+    if(form) { 
+      form.onsubmit = (event) => {
+        event.preventDefault();
 
-$("#open-modal-3").onclick = () => {
-  modal.openModal('<h2>Modal 3</h2><p>This is the content of Modal 3.</p>');
-}
+        const email = form.querySelector("#email").value.trim();
+        const password = form.querySelector("#password").value.trim();
+        
+        const formData = {
+          email:email,
+          password: password
+        };
 
-
+        console.log(formData);
+        
+      }
+    }
+};
 // 1. Xử lý được sự kiện submit form, lấy được các giá trị của input khi submit
 // 2. Thêm tùy chọn bật/tắt cho phép click vào overlay để đóng modal
 // 3. Không cho phép cuộn trang khi modal hiển thị
