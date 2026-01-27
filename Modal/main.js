@@ -16,7 +16,20 @@ const $$ = document.querySelectorAll.bind(document);
 
 
 function Modal() {
-  this.openModal = content => {
+  this.openModal = (option = {}) => {
+    const { templateId } = option;
+    console.log(templateId);
+    
+    const template = $(`#${templateId}`);
+
+    if(!template) {
+      console.error(`${template} does not exist!`);
+      return;
+    }
+
+    const content = template.content.cloneNode(true);
+
+
     // Create modal elements
     const backdrop = document.createElement('div');
     backdrop.className = 'modal-backdrop';
@@ -30,10 +43,9 @@ function Modal() {
 
     const modalContent = document.createElement('div');
     modalContent.className = 'modal-content';
-    modalContent.innerHTML = content;
-
+    
     // Append content and elements
-    modalContent.innerHTML = content;
+    modalContent.append(content);
     container.append(closeButton, modalContent);
     backdrop.append(container);
     document.body.append(backdrop);
@@ -76,12 +88,16 @@ const modal = new Modal();
 // modal.openModal('<p>This is a dynamically created modal!</p>');
 
 $("#open-modal-1").onclick = () => {
-  modal.openModal('<h2>Modal 1</h2><p>This is the content of Modal 1.</p>');
+  modal.openModal({
+    templateId: "modal-1",
+  });
 }
 
 
 $("#open-modal-2").onclick = () => {
-  modal.openModal('<h2>Modal 2</h2><p>This is the content of Modal 2.</p>');
+  modal.openModal({
+    templateId: "modal-2",
+  });
 }
 
 
@@ -90,7 +106,9 @@ $("#open-modal-3").onclick = () => {
 }
 
 
-
+// 1. Xử lý được sự kiện submit form, lấy được các giá trị của input khi submit
+// 2. Thêm tùy chọn bật/tắt cho phép click vào overlay để đóng modal
+// 3. Không cho phép cuộn trang khi modal hiển thị
 
 
 
