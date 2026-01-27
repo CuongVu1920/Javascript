@@ -5,7 +5,7 @@ const $$ = document.querySelectorAll.bind(document);
 
 function Modal() {
   this.openModal = (option = {}) => {
-    const { templateId } = option;    
+    const { templateId, allowBackdropClose = true } = option;    
     const template = $(`#${templateId}`);
 
     if(!template) {
@@ -46,11 +46,13 @@ function Modal() {
       this.closeModal(backdrop);
     });
 
-    backdrop.onclick = (event) => {
-      if(event.target === backdrop) {
-        this.closeModal(backdrop);
-      }
-    };
+    if(allowBackdropClose) {
+      backdrop.onclick = (event) => {
+        if(event.target === backdrop) {
+          this.closeModal(backdrop);
+        }
+     };
+    }
 
     document.addEventListener('keydown', (event) => {
       if(event.key === 'Escape') {
@@ -85,6 +87,7 @@ $("#open-modal-1").onclick = () => {
 $("#open-modal-2").onclick = () => {
   const modalElement = modal.openModal({
     templateId: "modal-2",
+    allowBackdropClose: false,
   });
 
   const form = modalElement.querySelector("form");
