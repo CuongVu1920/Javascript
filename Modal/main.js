@@ -60,6 +60,9 @@ function Modal() {
       }
     });
 
+    // Disable page scroll when modal is open
+    document.body.classList.add('no-scroll');
+
     return backdrop;
   };
 
@@ -67,6 +70,9 @@ function Modal() {
     modalElement.classList.remove("show");
     modalElement.addEventListener('transitionend', () => {
       modalElement.remove();
+
+      // Enable page scroll when modal is closed
+      document.body.classList.remove('no-scroll');
     });
   }
 
