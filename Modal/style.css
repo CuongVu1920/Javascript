@@ -43,14 +43,13 @@ main {
   color: orange;
 }
 
-
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgb(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   opacity: 0;
   visibility: hidden;
   transition: opacity, visibility;
@@ -62,42 +61,29 @@ main {
   visibility: visible;
 }
 
+.modal-container {
+  position: relative;
+  width: min(600px, 90%);
+  padding: 30px;
+  background: #ffff;
+  transform: scale(0);
+  transition: transform 0.3s;
+}
+
 .modal-backdrop.show .modal-container {
   transform: scale(1);
 }
 
 
-.modal-container {
-    position: relative;
-    width: min(600px, 90%);
-    border-radius: 10px;
-    padding: 30px;
-    background: #ffff;
-    transform: scale(0);
-    transition: transform 0.3s;
-}
-
 .modal-close {
   position: absolute;
-  top: 6px;
-  right: 6px;
   width: 30px;
   height: 30px;
+  background: white;
+  font-size: 2.6rem;
   border-radius: 50%;
-  background: #ebebee;
-  font-size: 2rem;
-  color: #6666;
-}
-
-.modal-close:hover {
-  color: #3333;
-}
-
-.modal-content {
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.no-scroll {
-  overflow: hidden;
+  color: orange;
+  border: 1px solid orange;
+  top: 8px;
+  right: 10px;
 }
