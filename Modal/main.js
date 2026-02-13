@@ -58,6 +58,8 @@ function Modal() {
       }
     });
 
+    return backdrop;
+
   },
   this.closeModal = (modalElement) => {
     modalElement.classList.remove("show");
@@ -79,16 +81,34 @@ const modal = new Modal();
 // }
 
 $("#open-modal-1").onclick = () => {
-  modal.openModal({
+  const modal1 = modal.openModal({
     templateId: "modal-1",
   });
 }
 
 
 $("#open-modal-2").onclick = () => {
-  modal.openModal({
+  const modal2 = modal.openModal({
     templateId: "modal-2",
   })
+
+  if(modal2) {
+    const form = modal2.querySelector("#login-form");
+    
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const email = form.querySelector("#email").value.trim();
+      const password = form.querySelector("#password").value.trim();
+
+      console.log(email);
+      console.log(password);
+      
+
+
+    })
+    
+  }
 }
 
 // 1. Xử lý được sự kiện submit form, lấy được các giá trị của input khi submit
