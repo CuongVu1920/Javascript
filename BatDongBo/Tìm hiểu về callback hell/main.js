@@ -34,3 +34,6 @@ sendRequest('GET', 'https://api01.f8team.dev/api/address/provinces', (responseTe
       });  
   });
 });
+
+
+// Promise
