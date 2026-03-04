@@ -20,13 +20,13 @@ sendRequest("GET", 'https://api01.f8team.dev/api/address/provinces')
   .then((responseText) => {
     const provinces = JSON.parse(responseText).data;
     const firstProvince = provinces[0];
-    console.log(firstProvince);
+  
     
-
     return sendRequest(
       'GET',
       `https://api01.f8team.dev/api/address/districts?province_id=${firstProvince.province_id}`
     );
+
   })
   .then((responseText) => {
     const districts = JSON.parse(responseText).data;
