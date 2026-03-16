@@ -26,3 +26,17 @@ const result3 = add(3, 2); // Function Execution Context #3
 
 // Tóm lại, Execution Context giúp JavaScript xác định code nào đang chạy, biến nào có thể truy cập, 
 // và quản lý quá trình thực thi một cách hiệu quả.
+
+
+// ---------Execution context trong JavaScript gồm 3 thành phần chính------------:
+
+/**
+ * 1. Variable Enviroment (Môi trường biến): lưu trữ các biến, hàm, 
+ *    và thông tin scope (var và function declarations)
+ * 2. Lexcial Enviroment (môi trường từ vựng) 
+ *  - Lưu trữ thông tin về phạm vi (scope) và môi trường liên hệ giữa các biến, 
+ *    hàm với scope bên ngoài (biến let, const và function parameters - có tham số)
+ * 3. This Binding:
+ *      Xác định giá trị của từ khóa this trong execution context hiện tại.
+ *  
+ */
