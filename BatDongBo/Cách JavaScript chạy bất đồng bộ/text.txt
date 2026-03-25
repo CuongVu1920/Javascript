@@ -1,0 +1,102 @@
+javaScript là single-threaded nhưng lại xử lý được bất đồng bộ nhờ sự phối hợp của nhiều thành phần. Hãy cùng đi từng lớp một
+
+1. Execution Context và Call Stack
+ - Mỗi khi Js chạy code, nó tạo ra một Execution Context - môi trường chứa biến tham chiếu "this", và scope chain. Context đầu tiên luôn là
+   Global Execution Context, và mỗi lần gọi hàm sẽ tạo thêm một Function Execution Context mới được đẩy vào CallStack.
+
+2. CallStack
+
+  CallStack là một cấu trúc dữ liệu ngăn xếp (LIFO) ghi nhớ chính xác vị trí mà chương trình đang thực thi
+
+    - Cơ chế: khi một hàm được gọi, nó được "đẩy" (push) vào đỉnh của stack. Khi hàm kết thúc, nó bị "lấy ra" (pop) khỏi stack.
+    - Đặc điểm: Js là ngôn ngữ đơn luồng, nghĩa là chỉ có một CallStack duy nhất. Nó chỉ có thể làm một 1 tại 1 thời điểm.
+
+    function foo() {
+      console.log('foo');
+    }
+
+    function bar() {
+      foo();
+      console.log('bar');
+    }
+
+    bar();
+    // Stack: bar() -> foo() -> console.log('foo') -> kết thúc foo -> console.log('bar') -> kết thúc bar
+    
+Vấn đề: Blocking (Chặn luồng)
+  Vì chỉ có một stack, nếu một hàm mất quá nhiều tg (ví dụ: xử lý ảnh nặng hoặc while(true)), toàn bộ trình duyệt sẽ bị đơ, không thể click, không thể chạy code khác.
+
+  Để giải quyết vấn đề này, môi trường trình duyệt (Browser) cung cấp thêm "Web APIs"
+
+3. Web APIs
+
+Web APIs không phải là một phần của ngôn ngữ JS, mà là các tiện ích được cung cấp bởi môi trường (Browser or Nodejs)
+
+  - Chức năng: Chúng cho phép thực hiện các tác vụ bất đồng bộ mà Js thuần túy k làm được.
+  - Các loại phổ biến:
+    - setTimeOut, setInterval
+    - DOM Events
+    - Fetch API 
+    - addEventListener
+    - localStorage, console
+
+Khi bạn gọi 1 Web APIs, nó không chạy trong CallStack. Nó được đưa cho trình duyệt xử lý ở background, giải phóng Callstack để tiếp tục chạy 
+các tác vụ khác.
+
+4. Task Queues
+
+  a.Macro Task Queue (Callback Queue)
+    - Chứa các callback từ setTimeOut, setInterval. event listeners
+
+  b. Micro Task Queue
+    - Đây là hàng đợi có độ ưu tiên cao hơn Macro Task. Chứa các callback từ:
+      - Promise
+      - async/await
+      - MutationObserver
+      - queueMicrotask
+5. Event Loop (Vòng lặp sự kiện)
+  Event Loop là cơ chế giám sát hoạt động của toàn bộ hệ thống. Nó có nhiệm vụ kiểm tra liên tục:
+    1. CallStack có trống không? (Nếu có)
+    2. Micro Task Queue có việc không? (Nếu có -> đẩy toàn bộ vào Stack)
+    3. Macro Task Queue có việc không? (Nếu có -> đẩy 1 Task vào Stack)
+
+6. Mối liên hệ và ứng dụng thực tế
+
+  console.log('1. Start');
+
+  setTimeout(() => {
+      console.log('2. setTimeout (Macro Task)');
+  }, 0);
+
+  Promise.resolve().then(() => {
+      console.log('3. Promise (Micro Task)');
+  });
+
+  console.log('4. End');
+
+
+
+Diễn biến chi tiết:
+  1.  Call Stack nhận console.log('1. Start') -> chạy -> in ra 1.
+
+  2. Gặp setTimeout. Đây là Web API. Stack đưa nó cho trình duyệt, trình duyệt bắt đầu đếm timer (dù là 0ms). Call Stack được giải phóng.
+
+  3. Gặp Promise.resolve().then(...). Đây cũng là Web API (hoặc cơ chế Microtask). Callback được đưa vào Micro Task Queue.
+
+  4. Gặp console.log('4. End') -> in ra 4.
+
+  5. Call Stack bây giờ đã trống.
+
+  6. Event Loop xuất hiện. Nó nhìn thấy Stack trống.
+
+  7. Nó ưu tiên kiểm tra Micro Task Queue. Thấy có callback của Promise.
+
+  8. Đẩy callback đó vào Stack. Chạy và in ra 3. Promise.
+
+  9. (Micro Task Queue lúc này trống).
+
+  10. Event Loop tiếp theo kiểm tra Macro Task Queue. Thấy callback của setTimeout (dù đã chờ 0ms nhưng phải đợi Microtask xong).
+
+  11. Đẩy callback đó vào Stack. Chạy và in ra 2. setTimeout.
+
+Kết thúc.
