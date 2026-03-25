@@ -100,3 +100,14 @@ Diễn biến chi tiết:
   11. Đẩy callback đó vào Stack. Chạy và in ra 2. setTimeout.
 
 Kết thúc.
+
+1. Start
+4. End
+3. Promise
+2. setTimeout
+
+Tóm tắt mối quan hệ:
+- Call Stack chạy code đồng bộ.
+- Khi gặp tác vụ nặng/đợi, Web APIs xử lý ngoài luồng.
+- Khi Web API hoàn thành, callback được đưa vào Task Queues.
+- Event Loop là người gác cổng, chỉ cho phép Task Queue đưa callback vào Stack khi Stack trống, và luôn ưu tiên Micro Task trước Macro Task.
