@@ -126,3 +126,8 @@ const user1 = {
 const Cuong = { ...user1, name: 'Cuong Vu', age: 23 };
     
 console.log(Cuong); // { name: 'Cuong Vu', age: 23, is_student: true }
+
+/**
+ * - rest: là gom dữ liệu thành 1 mảng hoặc đối tượng, thường được sử dụng trong hàm để gom các tham số thành một mảng hoặc đối tượng
+ * - spread: là trải dữ liệu từ một mảng hoặc đối tượng thành phần tử riêng biệt, thường được sử dụng để kết hợp hoặc sao chép mảng và đối tượng.
+ */
