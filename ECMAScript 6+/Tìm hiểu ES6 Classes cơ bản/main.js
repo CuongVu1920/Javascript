@@ -75,3 +75,20 @@ console.log(person.name); // Alice
 person.name = "Bob"; // dùng setter để thay đổi tên
 console.log(person.name); // Bob -> Alice đã được thay thế bằng Bob và được trim trước khi trả về.
 person.name = ""; // Name cannot be empty.
+
+
+// Static method và Properties trong ES6 Class
+
+class MathUtils {
+    static PI = 3.14159;
+    
+    static add(a, b) {
+        return a + b;
+    }
+}
+
+console.log(MathUtils.PI); // 3.14159
+console.log(MathUtils.add(2, 3)); // 5
+
+// Static method và properties thuộc về class chứ không phải instance, 
+// nên chúng ta có thể truy cập trực tiếp qua tên class mà không cần tạo instance.
