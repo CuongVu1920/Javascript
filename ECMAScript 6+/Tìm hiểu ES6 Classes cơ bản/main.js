@@ -49,3 +49,29 @@ console.log(counter.value); // 1
 
 // Trong ví dụ này, `value` là một thuộc tính instance được khởi tạo trực tiếp trong class, 
 // không cần phải đặt trong constructor. Mỗi instance của Counter sẽ có giá trị riêng biệt cho `value`.
+
+// Getters và Setters trong ES6 Class
+
+class Person {
+    constructor(name) {
+        this._name = name; // sử dụng _ để đánh dấu thuộc tính private
+    }
+    
+    get name() {
+        return this._name.trim();
+    }
+
+    set name(newName) {
+        if (newName.length > 0) {
+            this._name = newName;
+        } else {
+            console.error("Name cannot be empty.");
+        }
+    }
+}
+
+const person = new Person("   Alice       ");
+console.log(person.name); // Alice
+person.name = "Bob"; // dùng setter để thay đổi tên
+console.log(person.name); // Bob -> Alice đã được thay thế bằng Bob và được trim trước khi trả về.
+person.name = ""; // Name cannot be empty.
