@@ -1,3 +1,6 @@
+// 'use strict'; // phải ở đầu file
+
+
 /**
  * Tại sao cần Strict Mode?
  * Strict Mode giúp chúng ta viết code an toàn hơn, tránh được những lỗi không mong muốn.
@@ -29,15 +32,36 @@ function foo() {
     bar = 'Hello'; // Không khai báo biến, sẽ tạo ra biến toàn cục
 }
 
-foo();
-console.log(bar); // Hello
+// foo();
+// console.log(bar); // Hello
 
-this; 
+// this; 
 // Trong Strict Mode, this sẽ trả về undefined, trong khi không sử dụng Strict Mode, 
 // this sẽ trả về đối tượng global (window trong trình duyệt)
 
-function test(a, a) { // Tham số trùng - không báo lỗi
-    return a;
-}
+// function test(a, a) { // Tham số trùng - không báo lỗi
+//     return a;
+// }
 
 // Vấn đề: Code vẫn chạy được nhưng logic sai, khó debug, dễ gây rò rỉ bộ nhớ
+
+// Cách bật Strict Mode
+
+// #Trong file JS thông thường
+
+
+let userName = 'Alice';
+
+// # Trong function cụ thể
+
+function oldCode() {
+    x = 1; // Vẫn tạo ra biến toàn cục
+}
+
+function newCode() {
+    'use strict';
+    x = 1; // Lỗi: x is not defined
+}
+
+newCode(); // Lỗi: x is not defined
+
